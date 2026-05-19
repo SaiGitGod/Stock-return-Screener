@@ -1,4 +1,5 @@
 name: Update Stock Data
+
 on:
   schedule:
     - cron: '0 11 * * 1-5'
@@ -10,12 +11,13 @@ permissions:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install yfinance pandas
+      - run: pip install yfinance pandas requests
       - run: python scripts/fetch_data.py
       - name: Commit updated data
         run: |
