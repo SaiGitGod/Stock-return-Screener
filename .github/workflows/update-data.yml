@@ -1,5 +1,4 @@
 name: Update Stock Data
-
 on:
   schedule:
     - cron: '0 11 * * 1-5'
