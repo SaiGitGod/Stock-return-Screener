@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated_at": "2026-05-19T12:50:29.819898Z",
+    "updated_at": "2026-05-19T13:59:08.315788Z",
     "stock_count": 500,
     "source": "Yahoo Finance via yfinance",
     "sectors": {
@@ -5435,6 +5435,21 @@
       "y1": 10.89
     },
     {
+      "symbol": "CHALET",
+      "name": "CHALET HOTELS LIMITED",
+      "sector": "Consumer",
+      "industry": "Lodging",
+      "market_cap": 175403352064,
+      "price": 800.95,
+      "prev_close": 789.85,
+      "d1": 1.41,
+      "w1": 5.51,
+      "m1": 2.69,
+      "m3": -7.66,
+      "m6": -16.66,
+      "y1": -12.73
+    },
+    {
       "symbol": "ANANTRAJ",
       "name": "ANANT RAJ LIMITED",
       "sector": "Realty",
@@ -7488,21 +7503,6 @@
       "m3": -23.21,
       "m6": -46.57,
       "y1": -52.88
-    },
-    {
-      "symbol": "CHALET",
-      "name": "CHALET HOTELS LIMITED",
-      "sector": "Consumer",
-      "industry": "Lodging",
-      "market_cap": 0,
-      "price": 800.95,
-      "prev_close": 789.85,
-      "d1": 1.41,
-      "w1": 5.51,
-      "m1": 2.69,
-      "m3": -7.66,
-      "m6": -16.66,
-      "y1": -12.73
     },
     {
       "symbol": "TENNIND",
