@@ -23,6 +23,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add public/data/stocks.json
+          git add public/data/stocks.json public/data/prices.json
           git diff --staged --quiet || git commit -m "Update stock data"
           git push
