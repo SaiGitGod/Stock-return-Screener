@@ -1,5 +1,105 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 
+// ── Password Gate ──
+// To change the password: replace the text inside the quotes below.
+// Share this password with your friends so they can access the site.
+const ACCESS_PASSWORD = "04051997";
+
+function simpleHash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = ((h << 5) - h) + str.charCodeAt(i);
+    h |= 0;
+  }
+  return h.toString(36);
+}
+
+const PASS_HASH = simpleHash(ACCESS_PASSWORD);
+
+function PasswordGate({ onUnlock }) {
+  const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  const handleSubmit = () => {
+    if (simpleHash(input.trim()) === PASS_HASH) {
+      try { sessionStorage.setItem("tdb-auth", PASS_HASH); } catch {}
+      onUnlock();
+    } else {
+      setError(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    }
+  };
+
+  return (
+    <div style={{
+      minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
+      background: "#ffffff", fontFamily: "'DM Sans', sans-serif",
+    }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      <div style={{
+        textAlign: "center", padding: 48, maxWidth: 380, width: "100%",
+        animation: shake ? "shake 0.4s ease" : "none",
+      }}>
+        <style>{`
+          @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+          }
+        `}</style>
+        <div style={{
+          width: 56, height: 56, borderRadius: 16, background: "#2563eb",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          margin: "0 auto 20px", fontSize: 24, color: "#fff", fontWeight: 700,
+        }}>TB</div>
+        <h1 style={{ fontSize: 22, fontWeight: 700, color: "#1e293b", marginBottom: 6 }}>The Daily Brief</h1>
+        <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 28 }}>Enter access code to continue</p>
+
+        <input
+          type="password"
+          value={input}
+          onChange={e => { setInput(e.target.value); setError(false); }}
+          onKeyDown={e => e.key === "Enter" && handleSubmit()}
+          placeholder="Access code"
+          autoFocus
+          style={{
+            width: "100%", padding: "14px 16px", fontSize: 15,
+            border: `2px solid ${error ? "#ef4444" : "#e2e8f0"}`,
+            borderRadius: 12, outline: "none", textAlign: "center",
+            fontFamily: "'DM Sans', sans-serif", color: "#1e293b",
+            background: "#f8fafc", letterSpacing: "0.1em",
+            transition: "border 0.2s",
+          }}
+        />
+
+        {error && (
+          <p style={{ fontSize: 12, color: "#ef4444", marginTop: 10, fontWeight: 500 }}>
+            Incorrect code. Try again.
+          </p>
+        )}
+
+        <button onClick={handleSubmit} style={{
+          width: "100%", padding: "13px 0", marginTop: 16, fontSize: 14,
+          fontWeight: 700, color: "#ffffff", background: "#2563eb",
+          border: "none", borderRadius: 12, cursor: "pointer",
+          fontFamily: "'DM Sans', sans-serif", transition: "background 0.15s",
+        }}
+          onMouseEnter={e => e.target.style.background = "#1d4ed8"}
+          onMouseLeave={e => e.target.style.background = "#2563eb"}
+        >
+          Enter
+        </button>
+
+        <p style={{ fontSize: 11, color: "#cbd5e1", marginTop: 24 }}>
+          Don't have access? Ask the admin.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ── Theme definitions ──
 const THEMES = {
   light: {
@@ -229,6 +329,18 @@ const PRESETS = [
 
 // ── Main App ──
 export default function App() {
+  const [authed, setAuthed] = useState(() => {
+    try { return sessionStorage.getItem("tdb-auth") === PASS_HASH; } catch { return false; }
+  });
+
+  if (!authed) {
+    return <PasswordGate onUnlock={() => setAuthed(true)} />;
+  }
+
+  return <Dashboard />;
+}
+
+function Dashboard() {
   const [isDark, setIsDark] = useState(() => {
     try { return localStorage.getItem("tdb-theme") === "dark"; } catch { return false; }
   });
