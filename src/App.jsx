@@ -331,7 +331,7 @@ export default function App() {
     return (
       <div style={{ background:"#0a0e17", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'DM Sans',sans-serif" }}>
         <div style={{ textAlign:"center" }}>
-          <div style={{ fontSize:28, fontWeight:700, background:"linear-gradient(135deg,#818cf8,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", marginBottom:12 }}>RETURN SCREENER</div>
+          <div style={{ fontSize:28, fontWeight:700, background:"linear-gradient(135deg,#818cf8,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", marginBottom:12 }}>The Daily Brief</div>
           <div style={{ color:"#475569", fontSize:14 }}>Loading stock data…</div>
         </div>
       </div>
@@ -342,7 +342,7 @@ export default function App() {
     return (
       <div style={{ background:"#0a0e17", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'DM Sans',sans-serif" }}>
         <div style={{ textAlign:"center", maxWidth:500, padding:40 }}>
-          <div style={{ fontSize:28, fontWeight:700, background:"linear-gradient(135deg,#818cf8,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", marginBottom:16 }}>RETURN SCREENER</div>
+          <div style={{ fontSize:28, fontWeight:700, background:"linear-gradient(135deg,#818cf8,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", marginBottom:16 }}>The Daily Brief</div>
           <div style={{ color:"#fbbf24", fontSize:16, fontWeight:600, marginBottom:8 }}>Data not loaded yet</div>
           <div style={{ color:"#475569", fontSize:14, lineHeight:1.6 }}>
             The stock data file hasn't been generated yet. Run the workflow manually from the GitHub Actions tab, or wait for the next scheduled run (~4:30 PM IST weekdays).
@@ -366,11 +366,11 @@ export default function App() {
                 fontSize:22, fontWeight:700, letterSpacing:"-0.03em",
                 background:"linear-gradient(135deg,#818cf8,#6ee7b7)",
                 WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent",
-              }}>RETURN SCREENER</span>
-              <span style={{ fontSize:10, padding:"2px 8px", borderRadius:4, background:"#1e293b", color:"#94a3b8", fontWeight:600 }}>NSE</span>
+              }}>The Daily Brief</span>
+              <span style={{ fontSize:10, padding:"2px 8px", borderRadius:4, background:"#1e293b", color:"#94a3b8", fontWeight:600 }}>TDB</span>
             </div>
             <p style={{ fontSize:12, color:"#475569", margin:0, fontWeight:500 }}>
-              {stocks.length} stocks
+              {stocks.length} entries
               {meta?.updated_at && <span> · Updated {new Date(meta.updated_at).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"})}</span>}
             </p>
           </div>
